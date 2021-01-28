@@ -72,16 +72,6 @@ var didWin = function() {
 
 //Controller - user input
 
-// //create clickHandler for click on placing piece
-// var clickPieces = document.getElementsByTagName("td");
-// //iterate over the clickPieces array and add eventListeners to each square
-// for (var i = 0; i < clickPieces.length; i++) {
-//   clickPiece[i].addEventListener("click", addPiece);
-//   console.log(clickPiece[i]);
-// }
-
-
-
 // //create clickHandler for clicking reset button
 // //resets the gameBoard in model to gameBoard initial
 // //create variable to refer to reset button
@@ -89,6 +79,14 @@ window.onload = function () {
   var resetButton = document.querySelector(".resetButton");
   //create the event listener
     resetButton.addEventListener("click", reset);
+
+  //create clickHandler for click on placing piece
+  var clickPieces = document.getElementsByTagName("td");
+  //iterate over the clickPieces array and add eventListeners to each square
+  for (var i = 0; i < clickPieces.length; i++) {
+    clickPieces[i].addEventListener("click", addPiece);
+    console.log(clickPieces[i]);
+  }
 };
 
 
