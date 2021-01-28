@@ -5,6 +5,8 @@ var gameBoard;
 var player = true;
 //create win variable
 var won = false;
+//create tie variable
+var tie = false;
 
 //create reset function - resets the gameBoard
 var reset = function() {
@@ -39,43 +41,141 @@ var addPiece = function() {
   var column = this.cellIndex;
   console.log('clicked at ROW', row, 'COL', column);
   //if current user is X
+  if (player === true) {
     //then add a true to the row column clicked
-
-  //if current user is O
+    gameBoard[row][column] = true;
+    //if current user is an O
+  } else if (player === false) {
     //then add a false to the row column clicked
+    gameBoard[row][column] = false;
+  }
 
-  //invoke the didWin function and if true, then invoke message function for win with current player
+  //invoke the display function to render the gameBoard with added current pleice
+  display(row, column);
+  //invoke didWin function
+  didWin();
+  //if win true, then invoke message function for win with current player
+  if (won) {
+    //invoke win message function
+    didWin();
+    //then return to exit this function
+    return;
+  }
+  //otherwise invoke the didTie function
+  didTie();
+  //and if tie is true, then invoke message function for tie
+  if (tie) {
+    //invoke tie message function
+    didTie();
+    //then return to exit this function
+    return;
+  }
 
-  //otherwise invoke the didTie function and if true, then invoke message function for tie
+  //switch the player if reach this far
+    switchPlayer();
+  //then invoke function to display message with new player's turn
+    displayTurn();
 
 };
 
 //create didWin function that returns a boolean, ends the game, and calls display message in the view
 var didWin = function() {
-
+//check if there are any 3 in a rows for the current player
+//check all rows
+for (var i = 0; i < gameBoard.length; i++) {
+    if (gameBoard[i][0] === gameBoard[i][1] === gameBoard[i][2] === player) {
+      return won = true;
+    }
+}
+//check all columns
+for (var j = 0; j < gameBoard.length; j++) {
+  if (gameBoard[0][j] === gameBoard[1][j] === gameBoard[2][j] === player) {
+    return won = true;
+  }
+}
+//check both diagonals
+//first check top left to bottom right
+if (gameBoard[0][0] === gameBoard[1][1] === gameBoard[2][2]) {
+  return won = true;
+}
+//then check
+if (gameBoard[2][0] === gameBoard[1][1] === gameBoard[0][2]) {
+  return won = true;
+}
 };
 
 //create didTie function that returns a boolean, ends the game, and calls display message in the view
+var didTie = function() {
+  //if didWin is false and no indices in the gameBoard are null
+  //first check if no indices on gameBoard are null
+  var none = true;
+  for (var i = 0; i < gameBoard.length; i++) {
+    for (var j = 0; j < gameBoard[i].length; j++) {
+      if (gameBoard[i][j] === null) {
+        none = false;
+      }
+    }
+  }
+  if (!won && none) {
+    //then set tie to true
+    tie = true;
+  }
+}
+
+
 
 
 //View - presentation
 
 //function for displaying the gamepiece on gameboard based on the model
+var display = function(row, column) {
+  //if the value of the index is true, then add an X to the html gameboard at that cell
+  if (gameBoard[row][column]) {
+    //add an X to the innerhTML of the table cell
+    document.getElementsByTagName('td').rows[row].cells[column].innerhTML = 'X';
+    //if the value of the index is true, then add an O to the html gameboard at that cell
+  } else if (!gameBoard[row][column]) {
+
+  }
+};
 
 //function for displaying which user's (X or O) turn it is
+var displayTurn = function() {
+//TODO
+};
 
 //function for displaying message if a user has won
+var wonMessage = function() {
+  var piece;
+  if (player) {
+    piece = "X";
+  } else {
+    piece = "O";
+  }
+  alert("Game is over! Player " + piece + " has won the game! Click Ok and reset game to play again.");
+};
 
 //function for displaying message if there is a tie - called from model
+var tieMessage = function() {
+  var piece;
+  if (player) {
+    piece = "X";
+  } else {
+    piece = "O";
+  }
+  alert("Game is over! Player " + piece + " and Player " + !piece + " have tied! Click Ok and reset game to play again. ");
+};
+
 
 
 
 //Controller - user input
 
-// //create clickHandler for clicking reset button
-// //resets the gameBoard in model to gameBoard initial
-// //create variable to refer to reset button
+//run window.onload so that evenListeners execute when DOM fully loads
 window.onload = function () {
+  //create clickHandler for clicking reset button
+  //resets the gameBoard in model to gameBoard initial
+  //create variable to refer to reset button
   var resetButton = document.querySelector(".resetButton");
   //create the event listener
     resetButton.addEventListener("click", reset);
@@ -88,6 +188,8 @@ window.onload = function () {
     console.log(clickPieces[i]);
   }
 };
+
+
 
 
 //call the reset function to start the game
