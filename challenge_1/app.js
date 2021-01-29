@@ -24,12 +24,6 @@ var reset = function() {
   console.log('WHICH PLAYER', player);
 };
 
-//create function to switch the current player
-var switchPlayer = function() {
-  //switch the current player to the opposite
-  player = !player;
-};
-
 //create add piece function - access the correct box in the tictactoe table and place a piece according to who is the current user
 var addPiece = function() {
   //once user clicks on a box in the table, this function is invoked
@@ -38,6 +32,12 @@ var addPiece = function() {
   //get the column of the clicked table
   var column = this.cellIndex;
   console.log('clicked at ROW', row, 'COL', column);
+  //if the row and column already are true or false
+  if (gameBoard[row][column] !== null) {
+    //exit this function
+    return;
+  }
+
   //if current user is X
   if (player === true) {
     //then add a true to the row column clicked
@@ -50,25 +50,25 @@ var addPiece = function() {
 
   // //invoke the display function to render the gameBoard with added current pleice
   display(row, column);
-  //invoke didWin function
-  didWin();
-  //if win true, then invoke message function for win with current player
-  if (won) {
-    //invoke win message function
-    didWin();
-    return;
-  }
-  //otherwise invoke the didTie function
-  didTie();
-  //and if tie is true, then invoke message function for tie
-  if (tie) {
-    //invoke tie message function
-    didTie();
-    return;
-  }
+  // //invoke didWin function
+  // didWin();
+  // //if win true, then invoke message function for win with current player
+  // if (won) {
+  //   //invoke win message function
+  //   didWin();
+  //   return;
+  // }
+  // //otherwise invoke the didTie function
+  // didTie();
+  // //and if tie is true, then invoke message function for tie
+  // if (tie) {
+  //   //invoke tie message function
+  //   didTie();
+  //   return;
+  // }
 
   //switch the player if reach this far
-    switchPlayer();
+    player = !player;
   //then invoke function to display message with new player's turn
     displayTurn();
 
@@ -125,6 +125,7 @@ var addPiece = function() {
 
 //function for displaying the gamepiece on gameboard based on the model
 var display = function(row, col) {
+  var index;
   //get the correct table index
   if (row === 0 && col === 0) {
     index = 0;
@@ -149,10 +150,10 @@ var display = function(row, col) {
   //if the value of the index is true, then add an X to the html gameboard at that cell
   if (gameBoard[row][col]) {
     //add an X to the innerhTML of the table cell
-    document.getElementsByTagName('td')[index].innerhTML = 'X';
+    document.getElementsByTagName('td')[index].innerHTML = 'X';
     //otherwise, if the value of the index is false, then add an O to the html gameboard at that cell
   } else if (!gameBoard[row][col]) {
-    document.getElementsByTagName('td')[index].innerhTML = 'O';
+    document.getElementsByTagName('td')[index].innerHTML = 'O';
   }
 };
 
