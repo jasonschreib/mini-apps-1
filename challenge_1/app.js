@@ -152,7 +152,6 @@ var display = function(row, col) {
   } else if (row === 2 && col === 2) {
     index = 8;
   }
-
   //if the value of the index is true, then add an X to the html gameboard at that cell
   if (gameBoard[row][col]) {
     //add an X to the innerhTML of the table cell
