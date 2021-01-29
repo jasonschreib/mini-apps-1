@@ -32,8 +32,6 @@ var switchPlayer = function() {
 
 //create add piece function - access the correct box in the tictactoe table and place a piece according to who is the current user
 var addPiece = function() {
-  console.log('CLICKED');
-  console.log('EVENT', event);
   //once user clicks on a box in the table, this function is invoked
   //get the row of the clicked table
   var row = this.parentNode.rowIndex;
@@ -50,7 +48,7 @@ var addPiece = function() {
     gameBoard[row][column] = false;
   }
 
-  //invoke the display function to render the gameBoard with added current pleice
+  // //invoke the display function to render the gameBoard with added current pleice
   display(row, column);
   //invoke didWin function
   didWin();
@@ -58,7 +56,6 @@ var addPiece = function() {
   if (won) {
     //invoke win message function
     didWin();
-    //then return to exit this function
     return;
   }
   //otherwise invoke the didTie function
@@ -67,7 +64,6 @@ var addPiece = function() {
   if (tie) {
     //invoke tie message function
     didTie();
-    //then return to exit this function
     return;
   }
 
@@ -78,49 +74,49 @@ var addPiece = function() {
 
 };
 
-//create didWin function that returns a boolean, ends the game, and calls display message in the view
-var didWin = function() {
-//check if there are any 3 in a rows for the current player
-//check all rows
-for (var i = 0; i < gameBoard.length; i++) {
-    if (gameBoard[i][0] === gameBoard[i][1] === gameBoard[i][2] === player) {
-      return won = true;
-    }
-}
-//check all columns
-for (var j = 0; j < gameBoard.length; j++) {
-  if (gameBoard[0][j] === gameBoard[1][j] === gameBoard[2][j] === player) {
-    return won = true;
-  }
-}
-//check both diagonals
-//first check top left to bottom right
-if (gameBoard[0][0] === gameBoard[1][1] === gameBoard[2][2]) {
-  return won = true;
-}
-//then check
-if (gameBoard[2][0] === gameBoard[1][1] === gameBoard[0][2]) {
-  return won = true;
-}
-};
+// //create didWin function that returns a boolean, ends the game, and calls display message in the view
+// var didWin = function() {
+// //check if there are any 3 in a rows for the current player
+// //check all rows
+// for (var i = 0; i < gameBoard.length; i++) {
+//     if (gameBoard[i][0] === gameBoard[i][1] === gameBoard[i][2] === player) {
+//       return won = true;
+//     }
+// }
+// //check all columns
+// for (var j = 0; j < gameBoard.length; j++) {
+//   if (gameBoard[0][j] === gameBoard[1][j] === gameBoard[2][j] === player) {
+//     return won = true;
+//   }
+// }
+// //check both diagonals
+// //first check top left to bottom right
+// if (gameBoard[0][0] === gameBoard[1][1] === gameBoard[2][2]) {
+//   return won = true;
+// }
+// //then check
+// if (gameBoard[2][0] === gameBoard[1][1] === gameBoard[0][2]) {
+//   return won = true;
+// }
+// };
 
 //create didTie function that returns a boolean, ends the game, and calls display message in the view
-var didTie = function() {
-  //if didWin is false and no indices in the gameBoard are null
-  //first check if no indices on gameBoard are null
-  var none = true;
-  for (var i = 0; i < gameBoard.length; i++) {
-    for (var j = 0; j < gameBoard[i].length; j++) {
-      if (gameBoard[i][j] === null) {
-        none = false;
-      }
-    }
-  }
-  if (!won && none) {
-    //then set tie to true
-    tie = true;
-  }
-}
+// var didTie = function() {
+//   //if didWin is false and no indices in the gameBoard are null
+//   //first check if no indices on gameBoard are null
+//   var none = true;
+//   for (var i = 0; i < gameBoard.length; i++) {
+//     for (var j = 0; j < gameBoard[i].length; j++) {
+//       if (gameBoard[i][j] === null) {
+//         none = false;
+//       }
+//     }
+//   }
+//   if (!won && none) {
+//     //then set tie to true
+//     tie = true;
+//   }
+// }
 
 
 
@@ -128,20 +124,46 @@ var didTie = function() {
 //View - presentation
 
 //function for displaying the gamepiece on gameboard based on the model
-var display = function(row, column) {
-  //if the value of the index is true, then add an X to the html gameboard at that cell
-  if (gameBoard[row][column]) {
-    //add an X to the innerhTML of the table cell
-    document.getElementsByTagName('td').rows[row].cells[column].innerhTML = 'X';
-    //if the value of the index is true, then add an O to the html gameboard at that cell
-  } else if (!gameBoard[row][column]) {
+var display = function(row, col) {
+  //get the correct table index
+  if (row === 0 && col === 0) {
+    index = 0;
+  } else if (row === 0 && col === 1) {
+    index = 1;
+  } else if (row === 0 && col === 2) {
+    index = 2;
+  } else if (row === 1 && col === 0) {
+    index = 3;
+  } else if (row === 1 && col === 1) {
+      index = 4;
+  } else if (row === 1 && col === 2) {
+      index = 5;
+  } else if (row === 2 && col === 0) {
+      index = 6;
+  } else if (row === 2 && col === 1) {
+      index = 7;
+  } else if (row === 2 && col === 2) {
+    index = 8;
+  }
 
+  //if the value of the index is true, then add an X to the html gameboard at that cell
+  if (gameBoard[row][col]) {
+    //add an X to the innerhTML of the table cell
+    document.getElementsByTagName('td')[index].innerhTML = 'X';
+    //otherwise, if the value of the index is false, then add an O to the html gameboard at that cell
+  } else if (!gameBoard[row][col]) {
+    document.getElementsByTagName('td')[index].innerhTML = 'O';
   }
 };
 
 //function for displaying which user's (X or O) turn it is
 var displayTurn = function() {
-//TODO
+  if (player) {
+    document.getElementById("turn").innerHTML = "It is now Player X's turn.";
+  }
+  else {
+    document.getElementById("turn").innerHTML = "It is now Player O's turn.";
+  }
 };
 
 //function for displaying message if a user has won
