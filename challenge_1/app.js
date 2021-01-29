@@ -17,8 +17,6 @@ var reset = function() {
   ];
   //set the current player to be X again - which is stored as a boolean true
   player = true;
-  //create a message that appears saying it's a new game
-  //TODO
 
   console.log('NEW GAME');
   console.log('WHICH PLAYER', player);
@@ -51,13 +49,13 @@ var addPiece = function() {
   // //invoke the display function to render the gameBoard with added current pleice
   display(row, column);
   // //invoke didWin function
-  // didWin();
+  didWin();
   // //if win true, then invoke message function for win with current player
-  // if (won) {
-  //   //invoke win message function
-  //   didWin();
-  //   return;
-  // }
+  if (won) {
+    //invoke win message function
+    wonMessage();
+    return;
+  }
   // //otherwise invoke the didTie function
   // didTie();
   // //and if tie is true, then invoke message function for tie
@@ -74,31 +72,31 @@ var addPiece = function() {
 
 };
 
-// //create didWin function that returns a boolean, ends the game, and calls display message in the view
-// var didWin = function() {
-// //check if there are any 3 in a rows for the current player
-// //check all rows
-// for (var i = 0; i < gameBoard.length; i++) {
-//     if (gameBoard[i][0] === gameBoard[i][1] === gameBoard[i][2] === player) {
-//       return won = true;
-//     }
-// }
-// //check all columns
-// for (var j = 0; j < gameBoard.length; j++) {
-//   if (gameBoard[0][j] === gameBoard[1][j] === gameBoard[2][j] === player) {
-//     return won = true;
-//   }
-// }
-// //check both diagonals
-// //first check top left to bottom right
-// if (gameBoard[0][0] === gameBoard[1][1] === gameBoard[2][2]) {
-//   return won = true;
-// }
-// //then check
-// if (gameBoard[2][0] === gameBoard[1][1] === gameBoard[0][2]) {
-//   return won = true;
-// }
-// };
+//create didWin function that returns a boolean, ends the game, and calls display message in the view
+var didWin = function() {
+//check if there are any 3 in a rows for the current player
+//check all rows
+for (var i = 0; i < gameBoard.length; i++) {
+    if (gameBoard[i][0] === player && gameBoard[i][1] === player && gameBoard[i][2] === player) {
+      return won = true;
+    }
+}
+//check all columns
+for (var j = 0; j < gameBoard.length; j++) {
+  if (gameBoard[0][j] === player && gameBoard[1][j] === player && gameBoard[2][j] === player) {
+    return won = true;
+  }
+}
+//check both diagonals
+//first check top left to bottom right
+if (gameBoard[0][0] === player && gameBoard[1][1] === player && gameBoard[2][2] === player) {
+  return won = true;
+}
+//then check
+if (gameBoard[2][0] === player && gameBoard[1][1] === player && gameBoard[0][2] === player) {
+  return won = true;
+}
+};
 
 //create didTie function that returns a boolean, ends the game, and calls display message in the view
 // var didTie = function() {
