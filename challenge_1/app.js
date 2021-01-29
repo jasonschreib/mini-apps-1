@@ -15,6 +15,13 @@ var reset = function() {
     [null, null, null],
     [null, null, null],
   ];
+  //iterate over the gameBoard and reset the innerHTML of each element
+  var gameSquares = document.getElementsByTagName('td');
+  //iteration over the gameSquares array
+  for (var i = 0; i < gameSquares.length; i++) {
+    //set the innerHTML to an empty string for each index
+    gameSquares[i].innerHTML = "";
+  }
   //set the current player to be X again - which is stored as a boolean true
   player = true;
 
@@ -56,14 +63,14 @@ var addPiece = function() {
     wonMessage();
     return;
   }
-  // //otherwise invoke the didTie function
-  // didTie();
-  // //and if tie is true, then invoke message function for tie
-  // if (tie) {
-  //   //invoke tie message function
-  //   didTie();
-  //   return;
-  // }
+  //otherwise invoke the didTie function
+  didTie();
+  //and if tie is true, then invoke message function for tie
+  if (tie) {
+    //invoke tie message function
+    tieMessage();
+    return;
+  }
 
   //switch the player if reach this far
     player = !player;
@@ -99,22 +106,23 @@ if (gameBoard[2][0] === player && gameBoard[1][1] === player && gameBoard[0][2] 
 };
 
 //create didTie function that returns a boolean, ends the game, and calls display message in the view
-// var didTie = function() {
-//   //if didWin is false and no indices in the gameBoard are null
-//   //first check if no indices on gameBoard are null
-//   var none = true;
-//   for (var i = 0; i < gameBoard.length; i++) {
-//     for (var j = 0; j < gameBoard[i].length; j++) {
-//       if (gameBoard[i][j] === null) {
-//         none = false;
-//       }
-//     }
-//   }
-//   if (!won && none) {
-//     //then set tie to true
-//     tie = true;
-//   }
-// }
+var didTie = function() {
+  //if didWin is false and no indices in the gameBoard are null
+  //first check if no indices on gameBoard are null
+  var none = true;
+  for (var i = 0; i < gameBoard.length; i++) {
+    for (var j = 0; j < gameBoard[i].length; j++) {
+      if (gameBoard[i][j] === null) {
+        none = false;
+        return;
+      }
+    }
+  }
+  if (!won && none) {
+    //then set tie to true
+    tie = true;
+  }
+}
 
 
 
@@ -179,12 +187,15 @@ var wonMessage = function() {
 //function for displaying message if there is a tie - called from model
 var tieMessage = function() {
   var piece;
+  var piece2;
   if (player) {
     piece = "X";
+    piece2 = "O";
   } else {
     piece = "O";
+    piece2 = "X"
   }
-  alert("Game is over! Player " + piece + " and Player " + !piece + " have tied! Click Ok and reset game to play again. ");
+  alert("Game is over! Player " + piece + " and Player " + piece2 + " have tied! Click Ok and reset game to play again. ");
 };
 
 
