@@ -11,11 +11,15 @@ const port = process.env.port || 4000;
 //serve up the index.html page that lives in the client
 app.use(express.static('client'));
 
+//use express body-parser to parse the incoming request for post requests
+app.use(express.urlencoded({extended: true}));
+//^^This allows the parsing of both JSON objects or arrays
 
 //POST method route
 app.post('/convertToCSV', function(req, res) {
-  console.log('POST');
-  res.send("POST request to homepage");
+  console.log('POST', req);
+  res.send(`POST request to homepage ${req.body.inputText}`);
+  //respond to the user by passing the form and the converted JSON back
 });
 
 app.get('/getTest', function(req, res) {
@@ -29,6 +33,5 @@ var parseBody = (req, res, next) => {
 
   next();
 };
-
 
 app.listen(port, () => console.log(`Server running on PORT ${port}`));

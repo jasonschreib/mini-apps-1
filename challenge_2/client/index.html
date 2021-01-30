@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>CSV Record Generator</title>
   <style>
-    h1, h2, .input {
+    h1, h2, .form {
       text-align: center;
     }
     input:invalid {
@@ -19,13 +19,15 @@
   <h1>CSV Record Generator</h1>
   <h2>Insert your JSON data into the form below:</h2>
 <!--Create div with form and submit button-->
-<div class="input">
-
-  <form action="convertToCSV" method="POST">
-    <textArea type="text" rows="4" cols="50">Enter JSON data here...</textArea>
-    <input type="submit" id="submitButton" name="data">
+<div class="form">
+  <form action="/convertToCSV" method="POST">
+    <div class="form">
+      <textArea type="text" name="inputText" id="inputText" rows="4" cols="50" required>Enter JSON data here...</textArea>
+    </div>
+    <div class="form">
+      <input type="submit" value="Submit!">
+    </div>
   </form>
-
 </div>
 
 </body>
