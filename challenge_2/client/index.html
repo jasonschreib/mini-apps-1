@@ -1,2 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSV Record Generator</title>
+  <style>
+    h1, h2, .input {
+      text-align: center;
+    }
+    input:invalid {
+      border: 2px red;
+    }
+  </style>
+</head>
 
+
+<body>
+
+  <h1>CSV Record Generator</h1>
+  <h2>Insert your JSON data into the form below:</h2>
+<!--Create div with form and submit button-->
+<div class="input">
+
+  <form action="convertToCSV" method="POST">
+    <textArea type="text" rows="4" cols="50">Enter JSON data here...</textArea>
+    <input type="submit" id="submitButton" name="data">
+  </form>
+
+</div>
+
+</body>
+
+<script src="app.js"></script>
+</html>
 
