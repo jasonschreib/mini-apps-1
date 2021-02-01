@@ -22,7 +22,15 @@
 <div class="form">
   <form action="/convertToCSV" method="POST">
     <div class="form">
-      <textArea type="text" name="inputText" id="inputText" rows="4" cols="50" required>Enter JSON data here...</textArea>
+      <textArea type="text" name="inputText" id="inputText" rows="4" cols="50" required>{
+        "firstName": "Smitty",
+        "lastName": "Won",
+        "county": "San Mateo",
+        "city": "Redwood City",
+        "role": "Sales Person",
+        "sales": 4800000,
+        "children": []
+      }</textArea>
     </div>
     <div class="form">
       <input type="submit" value="Submit!">

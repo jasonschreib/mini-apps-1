@@ -17,11 +17,11 @@ app.use(express.urlencoded({extended: true}));
 
 //POST method route
 app.post('/convertToCSV', function(req, res) {
-  console.log('POST', req);
   //res.send(`POST request to homepage ${req.body.inputText}`);
 
   //set new var convertedText equal to the result of invocation of parseBody function
-  var convertedText = parseBody(req, res);
+  var convertedText = parseBody(req.body.inputText);
+  console.log('CONVERTED', convertedText);
 
   //create variable to store html page body with form
 
@@ -38,16 +38,16 @@ app.get('/getTest', function(req, res) {
 
 
 //parseBody function that will take in the JSON data from req.body and send it back as a response that is in CSV style
-var parseBody = (req, res, next) => {
+var parseBody = (jsonObject) => {
   //set string var for the csv
   var csvString = '';
 
 //take care of case where req.body.inputText is not an object
-if (typeof req.body.inputText !== Object) {
-  csvString += req.body.inputText;
+if (typeof jsonObject !== Object) {
+  csvString += jsonObject;
 } else {
   //iterate over the keys and set them as the top row of the csv
-  for (var [key, value] of Object.entries(req.body.inputText)) {
+  for (var [key, value] of Object.entries(jsonObject)) {
     //if the key's value is an array, then don't add it to the list
     if (Array.isArray(value)) {
       continue;
@@ -87,10 +87,10 @@ if (typeof req.body.inputText !== Object) {
   }
 
   //invoke the function on the original object
-  iterateOverNested(req.body.inputText);
+  iterateOverNested(jsonObject);
   }
 
-  csvString.split(" ").join(",");
+  return csvString.split(" ").join(",");
 };
 
 app.listen(port, () => console.log(`Server running on PORT ${port}`));
