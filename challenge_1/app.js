@@ -24,6 +24,9 @@ var reset = function() {
   }
   //set the current player to be X again - which is stored as a boolean true
   player = true;
+  //set won and tie variables to false again
+  won = false;
+  tie = false;
 
   console.log('NEW GAME');
   console.log('WHICH PLAYER', player);
