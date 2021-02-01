@@ -18,8 +18,14 @@ app.use(express.urlencoded({extended: true}));
 //POST method route
 app.post('/convertToCSV', function(req, res) {
   console.log('POST', req);
+  var parsedInput = parseBody(req, res);
+  console.log('PARSED REQ', parsedInput);
   res.send(`POST request to homepage ${req.body.inputText}`);
-  //respond to the user by passing the form and the converted JSON back
+  //create var convertedText
+
+  //set convertedText equal to the result of invocation of parseBody function
+
+  //respond to the user by passing the form and the convertedText as a part of the HTML page back
 });
 
 app.get('/getTest', function(req, res) {
@@ -30,7 +36,52 @@ app.get('/getTest', function(req, res) {
 
 //parseBody function that will take in the JSON data from req.body and send it back as a response that is in CSV style
 var parseBody = (req, res, next) => {
+  //set string var for the csv
+  var csvString = '';
+  //iterate over the keys and set them as the top row of the csv
+  for (var [key, value] of Object.entries(req.body.inputText)) {
+    //if the key's value is an array, then don't add it to the list
+    if (Array.isArray(value)) {
+      continue;
+    } else {
+      csvString += `${key} `;
+    }
+  }
+  //create new line
+  csvString += "\n";
+  //create recursive function for iterating through nested objects
+  var iterateOverNested = function(currObj) {
+    //set variable for the current object
+    var current = currObj;
+    //then iterate over the object and add each value of each property to the next row
+    for (var [key, value] of Object.entries(current)) {
+        //if the key's value is an array, then don't add it to the list
+        if (Array.isArray(value)) {
+          continue;
+        } else {
+        //add the string val to the result string
+        csvString +=`${value} `;
+        }
+    }
+    //create new line
+    csvString += "\n";
+    //if the current object's children property is empty
+    if (current.children.length === 0) {
+      //then just return
+      return;
+      //otherwise iterate over each object by going into children arrays
+    } else {
+      for (var i = 0; i < current.children.length; i++) {
+        //and recurse on each child
+        return iterateOverNested(current.children[i]);
+      }
+    }
+  }
 
+  //invoke the function on the original object
+  iterateOverNested(input);
+
+  csvString.split(" ").join(",");
   next();
 };
 
