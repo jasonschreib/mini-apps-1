@@ -16,5 +16,5 @@ class App extends React.Component {
   //create functional component for F1
 
 
-  ReactDom.render(< App/>, document.getElementById('app'));
+  //ReactDom.render(< App/>, document.getElementById('app'));
 }
