@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "nodemon": "nodemon server/server.js",
-    "babel": "./node_modules/.bin/babel client --out-dir public --presets @babel/preset-react --source-maps inline --watch"
+    "babel": "./node_modules/.bin/babel client --watch --out-dir public --presets @babel/preset-react --source-maps inline"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +20,6 @@
     "@babel/core": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
     "express": "^4.17.1",
-    "mongoose": "^5.11.16",
-    "react": "^17.0.1",
-    "reactdom": "^2.0.0"
+    "mongoose": "^5.11.16"
   }
 }
