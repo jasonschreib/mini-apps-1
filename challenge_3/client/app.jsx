@@ -1,7 +1,23 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //TODO: STATE
+    this.state ={
+      currentUser : {
+        name: '',
+        email: '',
+        password: '',
+        line1: '',
+        line2: '',
+        city: '',
+        state: '',
+        zip: '',
+        phone: 0,
+        creditCard: 0,
+        expiration: '',
+        cvv: 0,
+        zip: 0
+      }
+    }
   }
 
   // handleClickOnCheckout = this.handleClickOnCheckout.bind(this);
@@ -11,20 +27,31 @@ class App extends React.Component {
     e.preventDefault();
     console.log('Clicked on checkout!!');
     var formData = document.getElementById("nameForm");
-    console.log(formData.elements);
     //create the data object to be passed to server
     var fd = {
       'name': formData.elements[0].value,
       'email': formData.elements[1].value,
       'password': formData.elements[2].value
     };
-    console.log(fd);
     //send post request with data from form
     axios.post('/newUser', fd)
-      .then((data) => {
-        console.log('success!');
-        //upon success of the post request, bring the user to the next page in the checkout cycle
+      .then((response) => {
+        console.log('success!', response);
+        return response.json();
       })
+      .then((results) => {
+        console.log('RESULTS', results);
+        ////add the data to state of the app
+        this.setState({
+          currentUser : {
+            name: data.config.data.name,
+            email: data.config.data.email,
+            password: data.config.data.password
+          }
+        });
+        console.log(this.state);
+      });
+        //upon success of the post request, bring the user to the next page in the checkout cycle
   }
 
   //create function to handle click on 'next' button

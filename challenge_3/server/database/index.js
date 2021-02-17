@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/checkout');
+mongoose.connect('mongodb://localhost/checkout', {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -10,7 +10,7 @@ db.once('open', function() {
 
 let userSchema = new mongoose.Schema({
   name: String,
-  email: String,
+  email: {type: String, unique: true},
   password: String,
   line1: String,
   line2: String,
@@ -19,18 +19,35 @@ let userSchema = new mongoose.Schema({
   zip: String,
   phone: Number,
   creditCard: Number,
-  expiration: Date,
+  expiration: String,
   cvv: Number,
   zip: Number
 });
 
-let User = Mongoose.model('Users', userSchema);
+let User = mongoose.model('Users', userSchema);
 
-let save() => {
+let save = (inputData) => {
+  //save the data in a new entry in the database by first creating a new model
+  console.log('IN DB', inputData);
+  //create new user based on the model
+  const document = new User({
+    name: inputData.name,
+    email: inputData.email,
+    password: inputData.password
+  });
+  //save this document to db
+  document.save((err, results) => {
+    //err scheck
+    if (err) {
+      console.log('There was an error while saving...');
+    }
+    //return the results - this will get back to the server
+    return results;
 
+  })
 }
 
-let retrieve() => {
+let retrieve = () => {
 
 }
 

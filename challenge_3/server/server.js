@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('./database');
 
 const app = express();
 
@@ -12,10 +13,13 @@ app.use(express.json());
 //post request for adding data to database
 app.post('/newUser', (req, res) => {
   console.log('REQ', req.body);
-  //add this data from the request object to the database
-
-
-  res.end();
+  //add this data from the request object to the database by calling the database save function
+  Promise.resolve(mongoose.save(req.body))
+    .then((data) => {
+      console.log('DATA', data);
+      //return the data back to the client
+      res.send(data);
+    })
 });
 
 
