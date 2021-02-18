@@ -14,7 +14,7 @@ app.use(express.json());
 app.post('/newUser', (req, res) => {
   console.log('REQ', req.body);
   //add this data from the request object to the database by calling the database save function
-  return database.save(req.body)
+  database.save(req.body)
     .then((data) => {
       console.log('DATA', data);
       //return the data back to the client
