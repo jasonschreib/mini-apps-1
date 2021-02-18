@@ -26,26 +26,24 @@ class App extends React.Component {
   }
 
   //create function to handle change on a form input
-  handleInputChange(e) {
-    name = event.target.name;
-    value = event.target.value;
-
-    this.setState({
-      [name]: value
-    })
+  handleInputChange(event) {
+    var name = event.target.name;
+    var value = event.target.value;
+    console.log('VAL', value);
+    this.setState( ({
+      currentUser : {
+        ...this.state.currentUser,
+        [name] : value
+      }
+    }), () => {
+      console.log('STATE USER', this.state.currentUser);
+    });
   }
 
   //create function to handle click on 'checkout' button
   handleClickOnCheckout(e) {
     e.preventDefault();
     console.log('Clicked on checkout!!');
-    // var formData = document.getElementById("nameForm");
-    // //create the data object to be passed to server
-    // var fd = {
-    //   'name': formData.elements[0].value,
-    //   'email': formData.elements[1].value,
-    //   'password': formData.elements[2].value
-    // };
     //send post request with data from form
     // axios.post('/newUser', fd)
     //   .then((response) => {
@@ -54,15 +52,6 @@ class App extends React.Component {
     //   })
     //   .then((results) => {
     //     console.log('RESULTS', results);
-    //     ////add the data to state of the app
-    //     this.setState({
-    //       currentUser : {
-    //         name: data.config.data.name,
-    //         email: data.config.data.email,
-    //         password: data.config.data.password
-    //       }
-    //     });
-    //     console.log(this.state);
     //   });
     //set state of currentPage to 1
     this.setState({
@@ -72,7 +61,15 @@ class App extends React.Component {
 
   //create function to handle click on 'next' button
   handleClickOnNext(event) {
+    event.preventDefault();
+    console.log('Clicked on the next button');
     //increment the state by one
+    this.setState((state) => ({
+      currentPage : state.currentPage + 1
+    }), () => {
+      //console.log the state
+      console.log('STATE', this.state);
+    });
   }
 
   //create function to handle click on 'purchase' button
@@ -92,7 +89,9 @@ class App extends React.Component {
       {/* if the state is 0, then render the original checkout page (no form data) and pass in handleClickOnCheckout */}
       {this.state.currentPage === 0 ? <Homepage handleClickOnCheckout={this.handleClickOnCheckout} /> : null}
       {/* if the state is 1, then render the f1 page and pass in handleClickOnNext */}
+      {this.state.currentPage === 1 ? <F1 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
       {/* if the state is 2, then render the f2 page and pass in handleClickOnNext */}
+      {this.state.currentPage === 2 ? <F1 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
       {/* if the state is 3, then render the f2 page and pass in handleClickOnNext */}
       {/* if the state is 4, then render the f3 page and pass in handleClickOnNext */}
 
@@ -126,15 +125,15 @@ var F1 = (props) => {
         <form id="nameForm">
           <div>
             <label htmlFor="name">Name: </label>
-            <input type="text" id="name" name="name" required></input>
+            <input type="text" id="name" name="name" value={props.currentUser.name} onChange={props.handleInputChange} required></input>
           </div>
           <div>
             <label htmlFor="email">Email: </label>
-            <input type="email" id="email" name="email" required></input>
+            <input type="email" id="email" name="email" value={props.currentUser.email} onChange={props.handleInputChange} required></input>
           </div>
           <div>
             <label htmlFor="password">Password: </label>
-            <input type="password" id="password" name="password" required></input>
+            <input type="password" id="password" name="password" value={props.currentUser.password} onChange={props.handleInputChange} required></input>
           </div>
           <input type="submit" value="Next" onClick={props.handleClickOnNext}></input>
         </form>
