@@ -12,17 +12,18 @@ class App extends React.Component {
         city: '',
         state: '',
         zip: '',
-        phone: 0,
-        creditCard: 0,
+        phone: '',
+        creditCard: '',
         expiration: '',
-        cvv: 0,
-        zip: 0
+        cvv: '',
+        billingzip: ''
       },
       currentPage : 0
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClickOnCheckout = this.handleClickOnCheckout.bind(this);
     this.handleClickOnNext = this.handleClickOnNext.bind(this);
+    this.handleClickOnPurchase = this.handleClickOnPurchase.bind(this);
   }
 
   //create function to handle change on a form input
@@ -73,7 +74,13 @@ class App extends React.Component {
   }
 
   //create function to handle click on 'purchase' button
-
+  handleClickOnPurchase(event) {
+    console.log('Clicked on purchase button - return back to homepage');
+    //sent a post request to server with the state as data
+    this.setState({
+      currentPage: 0
+    });
+  }
   /*
   Current page with state
   1) create method for checkout button - starting the form
@@ -93,6 +100,7 @@ class App extends React.Component {
       {/* if the state is 2, then render the f2 page and pass in handleClickOnNext */}
       {this.state.currentPage === 2 ? <F2 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
       {/* if the state is 3, then render the f2 page and pass in handleClickOnNext */}
+      {this.state.currentPage === 3 ? <F3 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange} /> : null}
       {/* if the state is 4, then render the f3 page and pass in handleClickOnNext */}
 
     </div>
@@ -157,7 +165,7 @@ var F2 = (props) => {
           </div>
           <div>
           <label htmlFor="line2">Address 2: </label>
-            <input type="text" id="line2" name="line2" value={props.currentUser.line2} onChange={props.handleInputChange} required></input>
+            <input type="text" id="line2" name="line2" value={props.currentUser.line2} onChange={props.handleInputChange}></input>
           </div>
           <div>
           <label htmlFor="city">City: </label>
@@ -186,9 +194,38 @@ var F2 = (props) => {
 }
 
 //create functional component for F3
-
+var F3 = (props) => {
+  return (
+  <div>
+    <h1>Form 3</h1>
+    <form id="creditcardForm">
+      <h2>Finally, please enter your credit card information: </h2>
+      <div>
+        <label htmlFor="creditCard">Credit Card Number: </label>
+        <input type="text" id="creditCard" name="creditCard" value={props.currentUser.creditCard} onChange={props.handleInputChange} required></input>
+      </div>
+      <div>
+        <label htmlFor="expiration">Expiration Date: </label>
+        <input type="text" id="expiration" name="expiration" value={props.currentUser.expiration} onChange={props.handleInputChange} required></input>
+      </div>
+      <div>
+        <label htmlFor="cvv">CVV: </label>
+        <input type="text" id="cvv" name="cvv" value={props.currentUser.cvv} onChange={props.handleInputChange} required></input>
+      </div>
+      <div>
+        <label htmlFor="billingzip">Billing zip code: </label>
+        <input type="text" id="billingzip" name="billingzip" value={props.currentUser.billingzip} onChange={props.handleInputChange} required></input>
+      </div>
+    </form>
+    <input type="submit" value="Next" onClick={props.handleClickOnNext}></input>
+  </div>
+  )
+}
 
 //create functional component for Summary page
+
+
+
 
 
 ReactDOM.render(< App />, document.getElementById('app'));
