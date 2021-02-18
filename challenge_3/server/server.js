@@ -27,4 +27,3 @@ app.post('/newUser', (req, res) => {
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
 });
-
