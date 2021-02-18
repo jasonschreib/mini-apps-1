@@ -73,17 +73,19 @@ class App extends React.Component {
 
   //create function to handle click on 'purchase' button
   handleClickOnPurchase(event) {
-    console.log('Clicked on purchase button - return back to homepage');
+    console.log('Clicked on purchase button - will return back to homepage');
     // sent a post request to server with the state as data
     // send post request with data from form
     axios.post('/newUser', this.state.currentUser)
+      .then((data) => {
+        console.log('success!', data);
+      })
       .then(() => {
-        console.log('success!');
+        // reset state of currentPage to 0
+        this.setState({
+          currentPage: 0
+        });
       });
-    // reset state of currentPage to 0
-    this.setState({
-      currentPage: 0
-    });
   }
 
 
@@ -176,7 +178,7 @@ var F2 = (props) => {
           </div>
           <div>
             <label htmlFor="zip">Zip: </label>
-            <input type="text" id="zip" name="zip" value={props.currentUser.name} onChange={props.handleInputChange} required></input>
+            <input type="text" id="zip" name="zip" value={props.currentUser.zip} onChange={props.handleInputChange} required></input>
           </div>
         </div>
         <div>

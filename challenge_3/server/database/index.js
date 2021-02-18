@@ -33,23 +33,21 @@ let save = (inputData) => {
   const document = new User({
     name: inputData.name,
     email: inputData.email,
-    password: inputData.password
+    password: inputData.password,
+    line1: inputData.line1,
+    line2: inputData.line2,
+    city: inputData.city,
+    state: inputData.state,
+    zip: inputData.zip,
+    phone: inputData.phone,
+    creditCard: inputData.creditCard,
+    expiration: inputData.expiration,
+    cvv: inputData.cvv,
+    billingzip: inputData.billingzip
   });
   //save this document to db
-  document.save((err, results) => {
-    //err scheck
-    if (err) {
-      console.log('There was an error while saving...');
-    }
-    //return the results - this will get back to the server
-    return results;
-
-  })
+  return document.save();
 }
 
-let retrieve = () => {
-
-}
 
 module.exports.save = save;
-module.exports.retrieve = retrieve;
