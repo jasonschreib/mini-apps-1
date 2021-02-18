@@ -91,7 +91,7 @@ class App extends React.Component {
       {/* if the state is 1, then render the f1 page and pass in handleClickOnNext */}
       {this.state.currentPage === 1 ? <F1 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
       {/* if the state is 2, then render the f2 page and pass in handleClickOnNext */}
-      {this.state.currentPage === 2 ? <F1 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
+      {this.state.currentPage === 2 ? <F2 currentUser={this.state.currentUser} handleClickOnNext={this.handleClickOnNext} handleInputChange={this.handleInputChange}/> : null}
       {/* if the state is 3, then render the f2 page and pass in handleClickOnNext */}
       {/* if the state is 4, then render the f3 page and pass in handleClickOnNext */}
 
@@ -143,7 +143,47 @@ var F1 = (props) => {
 }
 
 //create functional component for F2
-
+var F2 = (props) => {
+  return (
+    <div>
+      <h1>Form 2</h1>
+      <h2>Now please enter the following fields: Shipping Address and Phone Number</h2>
+      <form id="shippingForm">
+        <div>
+        <h3>Shipping Address</h3>
+          <div>
+          <label htmlFor="line1">Address 1: </label>
+            <input type="text" id="line1" name="line1" value={props.currentUser.line1} onChange={props.handleInputChange} required></input>
+          </div>
+          <div>
+          <label htmlFor="line2">Address 2: </label>
+            <input type="text" id="line2" name="line2" value={props.currentUser.line2} onChange={props.handleInputChange} required></input>
+          </div>
+          <div>
+          <label htmlFor="city">City: </label>
+            <input type="text" id="city" name="city" value={props.currentUser.city} onChange={props.handleInputChange} required></input>
+          </div>
+          <div>
+          <label htmlFor="state">State: </label>
+            <input type="text" id="state" name="state" value={props.currentUser.state} onChange={props.handleInputChange} required></input>
+          </div>
+          <div>
+          <label htmlFor="zip">Zip: </label>
+            <input type="text" id="zip" name="zip" value={props.currentUser.name} onChange={props.handleInputChange} required></input>
+          </div>
+        </div>
+        <div>
+        <h3>Phone Number</h3>
+        <div>
+          <label htmlFor="phone">Phone Number: </label>
+            <input type="text" id="phone" name="phone" value={props.currentUser.phone} onChange={props.handleInputChange} required></input>
+          </div>
+        </div>
+        <input type="submit" value="Next" onClick={props.handleClickOnNext}></input>
+      </form>
+    </div>
+  )
+}
 
 //create functional component for F3
 

@@ -17,11 +17,11 @@ let userSchema = new mongoose.Schema({
   city: String,
   state: String,
   zip: String,
-  phone: Number,
-  creditCard: Number,
+  phone: String,
+  creditCard: String,
   expiration: String,
-  cvv: Number,
-  zip: Number
+  cvv: String,
+  billingzip: String
 });
 
 let User = mongoose.model('Users', userSchema);
