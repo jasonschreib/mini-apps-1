@@ -14,14 +14,24 @@ class App extends React.Component {
         {row3 : [0, 0, 0, 0, 0, 0, 0]},
         {row4 : [0, 0, 0, 0, 0, 0, 0]},
         {row5 : [0, 0, 0, 0, 0, 0, 0]}
-      ]
+      ],
+      current: 1
     }
+
+    this.handleClickOnBoard = this.handleClickOnBoard.bind(this);
   }
+
+  //function to handle clicks on the board
+  handleClickOnBoard(col) {
+    console.log('Clicked on column', col);
+  }
+
+
 
   render() {
     return (
       <div>
-      <Board board={this.state.board}/>
+      <Board board={this.state.board} handleClick={this.handleClickOnBoard}/>
       </div>
     )
   }

@@ -1,6 +1,6 @@
 var Circle = (props) => {
   return (
-    <div className='space'>
+    <div onClick={props.handleClick} className='space'>
       {console.log('IN CIRCLE', props)}
       {props.element}
     </div>
