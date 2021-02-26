@@ -20,7 +20,9 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
       <Board board={this.state.board}/>
+      </div>
     )
   }
 

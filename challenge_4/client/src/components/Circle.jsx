@@ -1,11 +1,9 @@
 var Circle = (props) => {
   return (
-    <span>
+    <div className='space'>
       {console.log('IN CIRCLE', props)}
-
-      YO FROM THE CIRCLE
-
-    </span>
+      {props.element}
+    </div>
   )
 
 }
