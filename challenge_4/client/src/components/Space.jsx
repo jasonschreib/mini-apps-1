@@ -1,7 +1,7 @@
-var Circle = (props) => {
+var Space = (props) => {
   return (
     <div onClick={props.handleClick} className='space'>
-      {console.log('IN CIRCLE', props)}
+      {console.log('IN Space', props)}
       {props.element}
     </div>
   )
@@ -10,4 +10,4 @@ var Circle = (props) => {
 
 
 
-export default Circle;
+export default Space;

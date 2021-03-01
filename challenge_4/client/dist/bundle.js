@@ -30,23 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./client/src/components/Circle.jsx":
-/*!******************************************!*\
-  !*** ./client/src/components/Circle.jsx ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar Circle = function Circle(props) {\n  return /*#__PURE__*/React.createElement(\"div\", {\n    onClick: props.handleClick,\n    className: \"space\"\n  }, console.log('IN CIRCLE', props), props.element);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Circle);\n\n//# sourceURL=webpack://challenge_4/./client/src/components/Circle.jsx?");
-
-/***/ }),
-
 /***/ "./client/src/components/Row.jsx":
 /*!***************************************!*\
   !*** ./client/src/components/Row.jsx ***!
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Circle_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Circle.jsx */ \"./client/src/components/Circle.jsx\");\n\n\nvar Row = function Row(props) {\n  return /*#__PURE__*/React.createElement(\"div\", null, /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[0],\n    handleClick: function handleClick() {\n      return props.handleClick(0);\n    }\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[1]\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[2]\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[3]\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[4]\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[5]\n  }), /*#__PURE__*/React.createElement(_Circle_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[6]\n  }));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Row);\n\n//# sourceURL=webpack://challenge_4/./client/src/components/Row.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Space_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Space.jsx */ \"./client/src/components/Space.jsx\");\n\n\nvar Row = function Row(props) {\n  return /*#__PURE__*/React.createElement(\"div\", null, /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[0],\n    handleClick: function handleClick() {\n      return props.handleClick(0);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[1],\n    handleClick: function handleClick() {\n      return props.handleClick(1);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[2],\n    handleClick: function handleClick() {\n      return props.handleClick(2);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[3],\n    handleClick: function handleClick() {\n      return props.handleClick(3);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[4],\n    handleClick: function handleClick() {\n      return props.handleClick(4);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[5],\n    handleClick: function handleClick() {\n      return props.handleClick(5);\n    }\n  }), /*#__PURE__*/React.createElement(_Space_jsx__WEBPACK_IMPORTED_MODULE_0__.default, {\n    element: props.contents[6],\n    handleClick: function handleClick() {\n      return props.handleClick(6);\n    }\n  }));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Row);\n\n//# sourceURL=webpack://challenge_4/./client/src/components/Row.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/Space.jsx":
+/*!*****************************************!*\
+  !*** ./client/src/components/Space.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar Space = function Space(props) {\n  return /*#__PURE__*/React.createElement(\"div\", {\n    onClick: props.handleClick,\n    className: \"space\"\n  }, console.log('IN Space', props), props.element);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Space);\n\n//# sourceURL=webpack://challenge_4/./client/src/components/Space.jsx?");
 
 /***/ })
 
