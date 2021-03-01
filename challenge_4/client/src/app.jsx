@@ -13,7 +13,7 @@ class App extends React.Component {
         {row2 : [0, 0, 0, 0, 0, 0, 0]},
         {row3 : [0, 0, 0, 0, 0, 0, 0]},
         {row4 : [0, 0, 0, 0, 0, 0, 0]},
-        {row5 : [0, 0, 0, 0, 0, 0, 0]}
+        {row5 : [1, 0, 0, 0, 0, 0, 2]}
       ],
       current: 1
     }
@@ -24,6 +24,24 @@ class App extends React.Component {
   //function to handle clicks on the board
   handleClickOnBoard(col) {
     console.log('Clicked on column', col);
+    //change the state to reflect the click on the column
+    //check the column that was passed in
+    //if the element at row5, col is a zero
+      //then change it to a 1 or 2 depending on which player's turn it is
+    //otherwise if the element at ro4, col is a zero
+      //then change it to a 1 or 2 depending on which player's turn it is
+    //otherwise if the element at row3, col is a zero
+      //then change it to a 1 or 2 depending on which player's turn it is
+    //otherwise if the element at row2, col is a zero
+      //then change it to a 1 or 2 depending on which player's turn it is
+    //otherwise if the element at row1, col is a zero
+      //then change it to a 1 or 2 depending on which player's turn it is
+    //otherwise if the element at row0, col is a zero
+      ///then change it to a 1 or 2 depending on which player's turn it is
+
+    //test for a tie
+
+    //test for a win
   }
 
 
