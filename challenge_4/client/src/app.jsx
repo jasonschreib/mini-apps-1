@@ -83,9 +83,11 @@ class App extends React.Component {
       console.log('Piece cannot be added there');
     }
 
-    console.log('BOARD', this.state.board);
     //test for a tie - if testForTie function is true
-    //invoke the alertOfTie function
+    if (this.testForTie()) {
+      //invoke the alertOfTie function
+      this.alertOfTie();
+    }
 
     //test for a win -
 
@@ -95,12 +97,20 @@ class App extends React.Component {
 
   //function to test for a tie
   testForTie() {
-
+    //tie occurs if all spaces are filled and no win has been detected
+    //create bool for allSpacesFilled - starts as true
+    //iterate over the board state
+      //if a space on the board is a 0
+        //change allSpacesFilled to false
+        //return
+    //if allSpacesFilled var is true and no win detected
+      //return true
   }
 
   //function to alert user that there was a tie in the game
   alertOfTie() {
-    //create an alert box that pops up signifying a tie
+    //TODO: create an alert box that pops up signifying a tie
+    console.log('There is a tie')
   }
 
 
