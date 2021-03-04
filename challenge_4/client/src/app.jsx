@@ -35,6 +35,16 @@ class App extends React.Component {
       this.setState({
         board: newState
       });
+      //test for a tie - if testForTie function is true
+      if (this.testForTie()) {
+        //invoke the alertOfTie function
+        this.alertOfTie();
+      }
+
+      //test for a win -
+
+      //invoke function to change current player
+      this.changePlayer();
       //otherwise if the element at ro4, col is a zero
     } else if (this.state.board[4][col] === 0) {
       console.log('IN HERE');
@@ -44,6 +54,16 @@ class App extends React.Component {
       this.setState({
         board: newState
       });
+      //test for a tie - if testForTie function is true
+      if (this.testForTie()) {
+        //invoke the alertOfTie function
+        this.alertOfTie();
+      }
+
+      //test for a win -
+
+      //invoke function to change current player
+      this.changePlayer();
       //otherwise if the element at row3, col is a zero
     } else if (this.state.board[3][col] === 0) {
       const newState = this.state.board.slice();
@@ -52,6 +72,16 @@ class App extends React.Component {
       this.setState({
         board: newState
       });
+      //test for a tie - if testForTie function is true
+      if (this.testForTie()) {
+        //invoke the alertOfTie function
+        this.alertOfTie();
+      }
+
+      //test for a win -
+
+      //invoke function to change current player
+      this.changePlayer();
       //otherwise if the element at row2, col is a zero
     } else if (this.state.board[2][col] === 0) {
       const newState = this.state.board.slice();
@@ -60,7 +90,16 @@ class App extends React.Component {
       this.setState({
         board: newState
       });
+      //test for a tie - if testForTie function is true
+      if (this.testForTie()) {
+        //invoke the alertOfTie function
+        this.alertOfTie();
+      }
 
+      //test for a win -
+
+      //invoke function to change current player
+      this.changePlayer();
       //otherwise if the element at row1, col is a zero
     } else if (this.state.board[1][col] === 0) {
       const newState = this.state.board.slice();
@@ -69,21 +108,7 @@ class App extends React.Component {
       this.setState({
         board: newState
       });
-      //otherwise if the element at row0, col is a zero
-    } else if (this.state.board[0][col] === 0) {
-      const newState = this.state.board.slice();
-      //then change it to a 1 or 2 depending on which player's turn it is
-      newState[0][col] = this.state.currentPlayer;
-      this.setState({
-        board: newState
-      });
-      //otherwise, alert the user a piece cannot be added there
-    } else {
-      //TODO: alert the user
-      console.log('Piece cannot be added there');
-    }
-
-    //test for a tie - if testForTie function is true
+      //test for a tie - if testForTie function is true
     if (this.testForTie()) {
       //invoke the alertOfTie function
       this.alertOfTie();
@@ -93,6 +118,29 @@ class App extends React.Component {
 
     //invoke function to change current player
     this.changePlayer();
+      //otherwise if the element at row0, col is a zero
+    } else if (this.state.board[0][col] === 0) {
+      const newState = this.state.board.slice();
+      //then change it to a 1 or 2 depending on which player's turn it is
+      newState[0][col] = this.state.currentPlayer;
+      this.setState({
+        board: newState
+      });
+      //test for a tie - if testForTie function is true
+    if (this.testForTie()) {
+      //invoke the alertOfTie function
+      this.alertOfTie();
+    }
+
+    //test for a win -
+
+    //invoke function to change current player
+    this.changePlayer();
+      //otherwise, alert the user a piece cannot be added there
+    } else {
+      //TODO: alert the user
+      console.log('Piece cannot be added there');
+    }
   }
 
   //function to test for a tie
@@ -100,11 +148,11 @@ class App extends React.Component {
     //tie occurs if all spaces are filled and no win has been detected
     //create bool for allSpacesFilled - starts as true
     //iterate over the board state
-      //if a space on the board is a 0
-        //change allSpacesFilled to false
-        //return
+    //if a space on the board is a 0
+    //change allSpacesFilled to false
+    //return
     //if allSpacesFilled var is true and no win detected
-      //return true
+    //return true
   }
 
   //function to alert user that there was a tie in the game
@@ -113,9 +161,23 @@ class App extends React.Component {
     console.log('There is a tie')
   }
 
-
+  //function to test for win in game for the current player
   testForWin() {
-
+    //iterate over the state of the board
+    //if the current item is a value that matches the currentPlayer in state
+    //test for a row win
+    //if the current value and the next 3 vals all match the currentPlayer in state
+    //return true
+    //test for a column wins
+    //if the current value and the next 3 vals in the same col all match the currentPlayer in state
+    //return true
+    //test for a major diagonal win
+    //if the current value and the next 3 vals in the diag all match the currentPlayer in state
+    //return true
+    //test for a minor diag win
+    //if the current value and the next 3 vals in the diag all match the currentPlayer in state
+    //return trues
+    //otherwise return false
   }
 
   //function to alert user that there was a win in the game
@@ -125,19 +187,19 @@ class App extends React.Component {
 
   //change the currentPlayer
   changePlayer() {
-  //if the currentPlayer is a 1
-  if (this.state.currentPlayer === 1) {
-    //then change it to 2
-    this.setState({
-      currentPlayer: 2
-    });
-    //if the currentPlayer is a 2
-  } else if (this.state.currentPlayer === 2) {
-    //then change it to a 1
-    this.setState({
-      currentPlayer: 1
-    });
-  }
+    //if the currentPlayer is a 1
+    if (this.state.currentPlayer === 1) {
+      //then change it to 2
+      this.setState({
+        currentPlayer: 2
+      });
+      //if the currentPlayer is a 2
+    } else if (this.state.currentPlayer === 2) {
+      //then change it to a 1
+      this.setState({
+        currentPlayer: 1
+      });
+    }
   }
 
 
