@@ -40,7 +40,6 @@ class App extends React.Component {
         //invoke the alertOfTie function
         this.alertOfTie();
       }
-
       //test for a win -
 
       //invoke function to change current player
@@ -59,7 +58,6 @@ class App extends React.Component {
         //invoke the alertOfTie function
         this.alertOfTie();
       }
-
       //test for a win -
 
       //invoke function to change current player
@@ -77,7 +75,6 @@ class App extends React.Component {
         //invoke the alertOfTie function
         this.alertOfTie();
       }
-
       //test for a win -
 
       //invoke function to change current player
@@ -95,7 +92,6 @@ class App extends React.Component {
         //invoke the alertOfTie function
         this.alertOfTie();
       }
-
       //test for a win -
 
       //invoke function to change current player
@@ -113,7 +109,6 @@ class App extends React.Component {
       //invoke the alertOfTie function
       this.alertOfTie();
     }
-
     //test for a win -
 
     //invoke function to change current player
@@ -131,7 +126,6 @@ class App extends React.Component {
       //invoke the alertOfTie function
       this.alertOfTie();
     }
-
     //test for a win -
 
     //invoke function to change current player
@@ -143,8 +137,8 @@ class App extends React.Component {
     }
   }
 
-  //function to test for a tie
-  testForTie() {
+  //function to test for a tie - pass in the state of the board
+  testForTie(board) {
     //tie occurs if all spaces are filled and no win has been detected
     //create bool for allSpacesFilled - starts as true
     //iterate over the board state
@@ -162,22 +156,25 @@ class App extends React.Component {
   }
 
   //function to test for win in game for the current player
-  testForWin() {
+  //pass in the board state as an input
+  testForWin(board) {
     //iterate over the state of the board
-    //if the current item is a value that matches the currentPlayer in state
-    //test for a row win
-    //if the current value and the next 3 vals all match the currentPlayer in state
-    //return true
-    //test for a column wins
-    //if the current value and the next 3 vals in the same col all match the currentPlayer in state
-    //return true
-    //test for a major diagonal win
-    //if the current value and the next 3 vals in the diag all match the currentPlayer in state
-    //return true
-    //test for a minor diag win
-    //if the current value and the next 3 vals in the diag all match the currentPlayer in state
-    //return trues
-    //otherwise return false
+    for (var i = 0; i < board.length; i++) {
+      for (var j = 0; j < board[0].length; j++) {
+        //if the current item is a value that matches the currentPlayer in state
+        if (board[i][j] === this.state.currentPlayer) {
+          //test for a row win - if the current value and the next 3 vals all match the currentPlayer in state
+          //return true
+          //test for a column wins - if the current value and the next 3 vals in the same col all match the currentPlayer in state
+          //return true
+          //test for a major diagonal win - if the current value and the next 3 vals in the diag all match the currentPlayer in state
+          //return true
+          //test for a minor diag win - if the current value and the next 3 vals in the diag all match the currentPlayer in state
+          //return trues
+        }
+      }
+    }
+    //catch all = return false
   }
 
   //function to alert user that there was a win in the game
