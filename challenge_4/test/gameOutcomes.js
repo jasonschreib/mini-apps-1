@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const gameResult = require('../client/src/app.jsx');
+const {testForTie, testForWin} = require('../client/src/app.jsx');
 
 describe('WinCases', () => {
   describe('HorizontalWin', () => {
@@ -15,8 +15,8 @@ describe('WinCases', () => {
         [0, 0, 0, 0, 0, 0, 0]
       ]
     });
-    it ('should return true for horizontal win' () => {
-      expect(gameResult.testForWin(gameBoard)).to.equal(true);
+    it ('should return true for horizontal win', () => {
+      expect(testForWin(gameBoard)).to.equal(true);
     });
   });
   describe('VerticalWin', () => {
@@ -31,7 +31,7 @@ describe('WinCases', () => {
       ]
     });
     it ('should return true for vertical win', () => {
-      expect(gameResult.testForWin(gameBoard)).to.equal(true);
+      expect(testForWin(gameBoard)).to.equal(true);
     });
   });
   describe('DiagonalWin', () => {
@@ -46,7 +46,7 @@ describe('WinCases', () => {
       ]
     });
     it ('should return true for a diagonal win', () => {
-      expect(gameResult.testForWin(gameBoard)).to.equal(true);
+      expect(testForWin(gameBoard)).to.equal(true);
     });
   });
 });
@@ -63,22 +63,23 @@ describe('TieCase', () => {
       ]
     });
     it ('should not result in a tie', () => {
-      expect(gameResult.testForTie(gameBoard)).to.equal(false);
+      expect(testForTie(gameBoard)).to.equal(false);
     });
   });
   describe('Tie', () => {
     before (() => {
       const gameBoard = [
-        [1, 2, 1, 2, 1, 2, 1],
-        [2, 1, 2, 1, 2, 1, 2],
-        [1, 2, 1, 2, 1, 2, 1],
-        [2, 1, 2, 1, 2, 1, 2],
-        [1, 2, 1, 2, 1, 2, 1],
+        [1, 1, 1, 2, 2, 2, 1],
+        [2, 2, 2, 1, 1, 1, 2],
+        [1, 1, 1, 2, 2, 2, 1],
+        [2, 1, 2, 1, 1, 1, 1],
+        [2, 2, 2, 1, 1, 1, 1],
         [2, 1, 2, 1, 2, 1, 2]
       ]
     });
     it ('should return true for a tie', () => {
       expect(gameResult.testForTie(gameBoard)).to.equal(true);
+      expect(gameResult.testForWin(gameBoard)).to.equal(false);
     });
   });
 });

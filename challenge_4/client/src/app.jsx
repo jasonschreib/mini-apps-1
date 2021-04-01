@@ -138,15 +138,27 @@ class App extends React.Component {
   }
 
   //function to test for a tie - pass in the state of the board
-  testForTie(board) {
+  export testForTie(board) {
     //tie occurs if all spaces are filled and no win has been detected
     //create bool for allSpacesFilled - starts as true
+    var allSpacesFilled = true;
     //iterate over the board state
-    //if a space on the board is a 0
-    //change allSpacesFilled to false
-    //return
+    for (var i = 0; i < board.length; i++) {
+      for (var j = 0; j < board[0].length; j++) {
+        //if a space on the board is a 0
+        if (board[i][j] === 0) {
+          //change allSpacesFilled to false
+          allSpacesFilled = false;
+          //return allSpacesFilled
+          return allSpacesFilled;
+        }
+      }
+    }
     //if allSpacesFilled var is true and no win detected
-    //return true
+    if (allSpacesFilled && !testForWin) {
+      //return allSpaces filled
+      return allSpacesFilled;
+    }
   }
 
   //function to alert user that there was a tie in the game
@@ -157,7 +169,7 @@ class App extends React.Component {
 
   //function to test for win in game for the current player
   //pass in the board state as an input
-  testForWin(board) {
+  export testForWin(board) {
     //iterate over the state of the board
     for (var i = 0; i < board.length; i++) {
       for (var j = 0; j < board[0].length; j++) {
@@ -212,3 +224,8 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+// module.exports = {
+//   testForWin,
+//   testForTie
+// };
