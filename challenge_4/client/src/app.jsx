@@ -224,4 +224,4 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-export default {testForTie, testForWin};
+export default {App.testForTie, App.testForWin};
