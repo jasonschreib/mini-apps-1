@@ -25,72 +25,17 @@ app.post('/convertToCSV', function(req, res) {
 
   //create variable to store html page body with form
 
-  //add the convertedText to this variable through templating
+  //add the convertedText to this variable through templating so the form is included as a response
 
   //respond to the user by passing the above var back
   res.send(`POST req. ${convertedText}`);
 });
 
+//test route
 app.get('/getTest', function(req, res) {
   console.log('GET');
   res.send("GET request to homepage");
 });
 
-
-//parseBody function that will take in the JSON data from req.body and send it back as a response that is in CSV style
-var parseBody = (jsonObject) => {
-  //set string var for the csv
-  var csvString = '';
-
-//take care of case where req.body.inputText is not an object
-if (typeof jsonObject !== Object) {
-  csvString += jsonObject;
-} else {
-  //iterate over the keys and set them as the top row of the csv
-  for (var [key, value] of Object.entries(jsonObject)) {
-    //if the key's value is an array, then don't add it to the list
-    if (Array.isArray(value)) {
-      continue;
-    } else {
-      csvString += `${key} `;
-    }
-  }
-  //create new line
-  csvString += "\n";
-  //create recursive function for iterating through nested objects
-  var iterateOverNested = function(currObj) {
-    //set variable for the current object
-    var current = currObj;
-    //then iterate over the object and add each value of each property to the next row
-    for (var [key, value] of Object.entries(current)) {
-        //if the key's value is an array, then don't add it to the list
-        if (Array.isArray(value)) {
-          continue;
-        } else {
-        //add the string val to the result string
-        csvString +=`${value} `;
-        }
-    }
-    //create new line
-    csvString += "\n";
-    //if the current object's children property is empty
-    if (current.children.length === 0) {
-      //then just return
-      return;
-      //otherwise iterate over each object by going into children arrays
-    } else {
-      for (var i = 0; i < current.children.length; i++) {
-        //and recurse on each child
-        return iterateOverNested(current.children[i]);
-      }
-    }
-  }
-
-  //invoke the function on the original object
-  iterateOverNested(jsonObject);
-  }
-
-  return csvString.split(" ").join(",");
-};
 
 app.listen(port, () => console.log(`Server running on PORT ${port}`));
