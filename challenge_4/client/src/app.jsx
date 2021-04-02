@@ -28,7 +28,6 @@ class App extends React.Component {
     //check the column that was passed in
     //if the element at row5, col is a zero
     if (this.state.board[5][col] === 0) {
-      console.log('IN HERE FIRST');
       const newState = this.state.board.slice();
       //then change it to a 1 or 2 depending on which player's turn it is
       newState[5][col] = this.state.currentPlayer;
@@ -36,14 +35,13 @@ class App extends React.Component {
         board: newState
       });
       //test for a win -
-      //if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise if the element at ro4, col is a zero
     } else if (this.state.board[4][col] === 0) {
-      console.log('IN HERE');
       const newState = this.state.board.slice();
       //then change it to a 1 or 2 depending on which player's turn it is
       newState[4][col] = this.state.currentPlayer;
@@ -51,9 +49,9 @@ class App extends React.Component {
         board: newState
       });
       //test for a win -
-      //if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise if the element at row3, col is a zero
@@ -65,9 +63,9 @@ class App extends React.Component {
         board: newState
       });
       //test for a win -
-      //if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise if the element at row2, col is a zero
@@ -79,9 +77,9 @@ class App extends React.Component {
         board: newState
       });
       //test for a win -
-      //if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise if the element at row1, col is a zero
@@ -93,9 +91,9 @@ class App extends React.Component {
         board: newState
       });
       //test for a win -
-      //if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise if the element at row0, col is a zero
@@ -112,9 +110,9 @@ class App extends React.Component {
         this.alertOfTie();
       }
       //test for a win -
-      //else if (this.testForWin()) {
-      //   this.alertOfWin();
-      // }
+      else if (this.testForWin(this.state.board)) {
+        this.alertOfWin();
+      }
       //invoke function to change current player
       this.changePlayer();
       //otherwise, alert the user a piece cannot be added there
@@ -126,7 +124,6 @@ class App extends React.Component {
 
   //function to test for a tie - pass in the state of the board
   testForTie(board) {
-    console.log('In here');
     //tie occurs if all spaces are filled and no win has been detected
     //create bool for allSpacesFilled - starts as true
     var allSpacesFilled = true;
@@ -151,7 +148,6 @@ class App extends React.Component {
 
   //function to alert user that there was a tie in the game
   alertOfTie() {
-    console.log('made it in alert');
     //TODO: create an alert box that pops up signifying a tie
     console.log('There is a tie');
   }
@@ -159,34 +155,34 @@ class App extends React.Component {
   //function to test for win in game for the current player
   //pass in the board state as an input
   testForWin(board) {
-    // //iterate over the state of the board
-    // for (var i = 0; i < board.length; i++) {
-    //   for (var j = 0; j < board[0].length; j++) {
-    //     //if the current item is a value that matches the currentPlayer in state
-    //     if (board[i][j] === this.state.currentPlayer) {
-    //       //test for row win - if current value and next 3 vals all match currentPlayer in state
-    //       if (board[i][j + 1] === this.state.currentPlayer && board[i][j + 2] === this.state.currentPlayer && board[i][j + 3] === this.state.currentPlayer) {
-    //         //return true
-    //         return true;
-    //       }
-    //       //test for column win - if current value and next 3 vals in the same col all match currentPlayer in state
-    //       else if (board[i + 1][j] === this.state.currentPlayer && board[i + 2][j] === this.state.currentPlayer && board[i + 3][j] === this.state.currentPlayer) {
-    //         //return true
-    //         return true;
-    //       }
-    //       //test for major diagonal win - if current value and next 3 vals in diag all match currentPlayer in state
-    //       else if (board[i + 1][j + 1] === this.state.currentPlayer && board[i + 2][j + 2] === this.state.currentPlayer && board[i + 3][j + 3] === this.state.currentPlayer) {
-    //         //return true
-    //         return true;
-    //       }
-    //       //test for minor diag win - if current value and next 3 vals in diag all match currentPlayer in state
-    //       else if (board[i - 1][j + 1] === this.state.currentPlayer && board[i - 2][j + 2] === this.state.currentPlayer && board[i - 3][j + 3] === this.state.currentPlayer) {
-    //         //return true
-    //         return true;
-    //       }
-    //     }
-    //   }
-    // }
+    //iterate over the state of the board
+    for (var i = 0; i < board.length; i++) {
+      for (var j = 0; j < board[0].length; j++) {
+        //if the current item is a value that matches the currentPlayer in state
+        if (board[i][j] === this.state.currentPlayer) {
+          //test for row win - if current value and next 3 vals all match currentPlayer in state
+          if (board[i][j + 1] === this.state.currentPlayer && board[i][j + 2] === this.state.currentPlayer && board[i][j + 3] === this.state.currentPlayer) {
+            //return true
+            return true;
+          }
+          //test for column win - if current value and next 3 vals in the same col all match currentPlayer in state
+          else if ((i + 3 < board.length)&&(board[i + 1][j] === this.state.currentPlayer && board[i + 2][j] === this.state.currentPlayer && board[i + 3][j] === this.state.currentPlayer)) {
+            //return true
+            return true;
+          }
+          //test for major diagonal win - if current value and next 3 vals in diag all match currentPlayer in state
+          else if ((i + 3 > 0 && i + 3 < board.length && j + 3 > 0 && j + 3 < board[0].length)&&(board[i + 1][j + 1] === this.state.currentPlayer && board[i + 2][j + 2] === this.state.currentPlayer && board[i + 3][j + 3] === this.state.currentPlayer)) {
+            //return true
+            return true;
+          }
+          //test for minor diag win - if current value and next 3 vals in diag all match currentPlayer in state
+          else if ((i - 3 > 0 && i - 3 < board.length && j + 3 > 0 && j + 3 < board[0].length)&&(board[i - 1][j + 1] === this.state.currentPlayer && board[i - 2][j + 2] === this.state.currentPlayer && board[i - 3][j + 3] === this.state.currentPlayer)) {
+            //return true
+            return true;
+          }
+        }
+      }
+    }
     //catch all = return false
     return false;
   }
