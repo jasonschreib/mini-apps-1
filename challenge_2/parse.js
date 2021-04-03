@@ -85,36 +85,57 @@ var parseBody = (jsonObject) => {
   }
   //push this array to the csvArray
   csvArray.push(tempArray);
-  //iterate over the root object and add the values as new keys to the csv report
 
-  ///set current obj variable
-
+debugger;
   //inner recursive function to add keys:
-  var addKeys = (currentObj, csv) => {
+  var addKeys = (currentObj, array) => {
     //if the currentObj has no children,
-      //then just add the keys to the csv - iterate over the current object and add each value that is not an array
+    if (currentObj.children.length === 0) {
+      //create temp array
+      var temporaryArray = [];
+      //then just push the keys to a new array - iterate over the current object's keys and add each value(except for the children prop)
+      for (var prop in currentObj) {
+        //once we hit the children prop,
+        if (prop === 'children') {
+          //then skip it
+          continue;
+        }
+        //otherwise, add these props to the temp array
+        temporaryArray.push(currentObj[prop]);
+      }
+      //push this array to the csvArray
+      csvArray.push(temporaryArray);
       //and return
-    //if the current object has children
-      //add the keys of currentObj to the csv - iterate over the current object's keys and add each value that is not an array
+      return;
+      //if the current object has children
+    } else {
+      //create temp array
+      var temporary2Array = [];
+      //add the keys of currentObj to a new array - iterate over the current object's keys and add each value(except for the children prop)
+      for (var prop in currentObj) {
+        //once we hit the children prop,
+        if (prop === 'children') {
+          //then skip it
+          continue;
+        }
+        //otherwise, add these props to the temp array
+        temporary2Array.push(currentObj[prop]);
+      }
+      //push this array to the csvArray
+      csvArray.push(temporary2Array);
       //iterate over the children and
-        //call the addKeys function on current obj
-        //return
+      for (var i = 0; i < currentObj.children.length; i++) {
+        //return - call the addKeys function on current obj
+        addKeys(currentObj.children[i], csvArray);
+      }
+    }
   }
+  //call the addKeys function with the root object
+  addKeys(jsonObject, csvArray);
 
-//call the addKeys function with the root object
-
-
+  return csvArray;
 //iterate over the array of arrays
   //join each array and push this string to the csvString followed by a new line
 
 //return the csv string
 }
-
-//create function to add values of each object to csv string
-//O: should return the updated csv string
-//I: a string object to add keys from
-//C: input must be a string object??
-//E: if the input is an empty object, then just add a new line to csv that is empty string
-
-//Justification = GOAL: To add an additional line to the csv report with the inputted object's values
-
