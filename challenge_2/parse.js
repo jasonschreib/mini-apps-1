@@ -1,60 +1,3 @@
-//parseBody function that will take in the JSON data from req.body and send it back as a response that is in CSV style
-// var parseBody = (jsonObject) => {
-//   //set string var for the csv
-//   var csvString = '';
-
-// //take care of case where req.body.inputText is not an object
-// if (typeof jsonObject !== Object) {
-//   csvString += jsonObject;
-// } else {
-//   //iterate over the keys and set them as the top row of the csv
-//   for (var [key, value] of Object.entries(jsonObject)) {
-//     //if the key's value is an array, then don't add it to the list
-//     if (Array.isArray(value)) {
-//       continue;
-//     } else {
-//       csvString += `${key} `;
-//     }
-//   }
-//   //create new line
-//   csvString += "\n";
-//   //create recursive function for iterating through nested objects
-//   var iterateOverNested = function(currObj) {
-//     //set variable for the current object
-//     var current = currObj;
-//     //then iterate over the object and add each value of each property to the next row
-//     for (var [key, value] of Object.entries(current)) {
-//         //if the key's value is an array, then don't add it to the list
-//         if (Array.isArray(value)) {
-//           continue;
-//         } else {
-//         //add the string val to the result string
-//         csvString +=`${value} `;
-//         }
-//     }
-//     //create new line
-//     csvString += "\n";
-//     //if the current object's children property is empty
-//     if (current.children.length === 0) {
-//       //then just return
-//       return;
-//       //otherwise iterate over each object by going into children arrays
-//     } else {
-//       for (var i = 0; i < current.children.length; i++) {
-//         //and recurse on each child
-//         return iterateOverNested(current.children[i]);
-//       }
-//     }
-//   }
-
-//   //invoke the function on the original object
-//   iterateOverNested(jsonObject);
-//   }
-
-//   return csvString.split(" ").join(",");
-// };
-
-
 //O: csv formatted string
 //I: JSON text object
 //C: input must be a string
@@ -86,7 +29,7 @@ var parseBody = (jsonObject) => {
   //push this array to the csvArray
   csvArray.push(tempArray);
 
-debugger;
+  debugger;
   //inner recursive function to add keys:
   var addKeys = (currentObj, array) => {
     //if the currentObj has no children,
@@ -134,8 +77,76 @@ debugger;
   addKeys(jsonObject, csvArray);
 
   return csvArray;
-//iterate over the array of arrays
-  //join each array and push this string to the csvString followed by a new line
-
-//return the csv string
 }
+
+
+var ConvertToCSVFormat = (array) => {
+  //create resultString var
+  var resultString = '';
+  //iterate over the array of arrays
+  for (var i = 0; i < array.length; i++) {
+    //join each array and push this string to the csvString followed by a new line
+    var tempString = array[i].join(',');
+    resultString = resultString + tempString;
+    resultString = resultString + '\n';
+  }
+  //return the result string
+  return resultString;
+}
+
+
+
+
+// var object = {
+//   "firstName": "Joshie",
+//   "lastName": "Wyattson",
+//   "county": "San Mateo",
+//   "city": "San Mateo",
+//   "role": "Broker",
+//   "sales": 1000000,
+//   "children": [
+//   {
+//     "firstName": "Beth Jr.",
+//     "lastName": "Johnson",
+//     "county": "San Mateo",
+//     "city": "Pacifica",
+//     "role": "Manager",
+//     "sales": 2900000,
+//     "children": [
+//       {
+//         "firstName": "Smitty",
+//         "lastName": "Won",
+//         "county": "San Mateo",
+//         "city": "Redwood City",
+//         "role": "Sales Person",
+//         "sales": 4800000,
+//         "children": []
+//       },
+//       {
+//         "firstName": "Allen",
+//         "lastName": "Price",
+//         "county": "San Mateo",
+//         "city": "Burlingame",
+//         "role": "Sales Person",
+//         "sales": 2500000,
+//         "children": []
+//       }
+//     ]
+//   },
+//   {
+//     "firstName": "Beth",
+//     "lastName": "Johnson",
+//     "county": "San Francisco",
+//     "city": "San Francisco",
+//     "role": "Broker/Sales Person",
+//     "sales": 7500000,
+//     "children": []
+//   }
+// ]
+// };
+
+// var parsed = parseBody(object);
+
+// var string = ConvertToCSVFormat(parsed);
+
+// console.log(string);
