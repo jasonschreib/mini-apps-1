@@ -9,8 +9,8 @@
 var parseBody = (jsonObject) => {
   //edge case: if the input object is empty string,
   if (jsonObject === '') {
-    //then return an empty string
-    return '';
+    //then return an empty []
+    return [];
   }
   //create var for csv array of arrays
   var csvArray = [];
@@ -28,11 +28,10 @@ var parseBody = (jsonObject) => {
   }
   //push this array to the csvArray
   csvArray.push(tempArray);
-
-  debugger;
   //inner recursive function to add keys:
   var addKeys = (currentObj, array) => {
     //if the currentObj has no children,
+    console.log('children', currentObj.children);
     if (currentObj.children.length === 0) {
       //create temp array
       var temporaryArray = [];
@@ -80,7 +79,7 @@ var parseBody = (jsonObject) => {
 }
 
 
-var ConvertToCSVFormat = (array) => {
+var convertToCSVFormat = (array) => {
   //create resultString var
   var resultString = '';
   //iterate over the array of arrays
@@ -94,7 +93,10 @@ var ConvertToCSVFormat = (array) => {
   return resultString;
 }
 
-
+module.exports = {
+  parseBody,
+  convertToCSVFormat
+}
 
 
 // var object = {
@@ -145,8 +147,21 @@ var ConvertToCSVFormat = (array) => {
 // ]
 // };
 
+// var object = {
+//   "firstName": "Smitty",
+//     "lastName": "Won",
+//       "county": "San Mateo",
+//         "city": "Redwood City",
+//           "role": "Sales Person",
+//             "sales": 4800000,
+//               "children": []
+// }
+
+
 // var parsed = parseBody(object);
 
-// var string = ConvertToCSVFormat(parsed);
+// var string = convertToCSVFormat(parsed);
 
 // console.log(string);
+
+
