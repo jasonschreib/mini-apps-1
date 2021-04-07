@@ -28,14 +28,15 @@ var post = function (e) {
       //we get the html back and need to append it
       $('.csvData').append(response);
       //create a download button
-      var downloadButton = $("<button id='downloadButton'onClick=clickedDownload(response) >Download</button>")
-      $('csvData').append(downloadButton);
+      var downloadButton = $("<button id='downloadButton'>Download</button>")
+      $('.csvData').append(downloadButton);
     }
   });
 };
 
 //if the download button is clicked, then trigger this function to write the file to hard drive
 var clickedDownload = function (response, e) {
+  console.log('made it in clickedDownload func');
   //prevent the page from reloading
   e.preventDefault();
   //write the file to the hard drive
@@ -44,7 +45,7 @@ var clickedDownload = function (response, e) {
       if (err) {
         throw err;
       }
-      console.log('Added new file')
+      console.log('Added new file');
     });
     //increment the counter
 };
@@ -60,3 +61,12 @@ var clickedDownload = function (response, e) {
 
 //Create event listener for the submit button
 document.getElementById('submitButton').addEventListener("click", post);
+
+//if there's an element for downloadButton
+if (document.getElementById('downloadButton')) {
+  //create var to hold the response data
+  var data = document.getElementByClassName('.csvData');
+  consoloe.log('data', data);
+  //Create event listener for the submit button
+  document.getElementById('downloadButton').addEventListener("click", clickedDownload(data));
+}
